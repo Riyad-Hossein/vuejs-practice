@@ -1,14 +1,13 @@
 <template>
   <div id="app">
     <p>{{title}}</p>
-    <navbar></navbar>
-    <ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-    </ul>
+    <navbar :friends="friends" @dlt="remove"></navbar>
+
+    <hr>
+    All Friends
+    <ol>
+        <li v-for="(friend,index) in friends" :key="index" ><span >{{friend.name}}</span></li>
+    </ol>
   </div>
 </template>
 
@@ -19,12 +18,28 @@ export default {
 
   data(){
     return{
-      title : "First vue app"
+      title : "First vue app",
+      friends:[
+        {name: "A" , status : true},
+        {name: "B" , status : true},
+        {name: "C" , status : false},
+        {name: "D" , status : true},
+        {name: "E" , status : false},
+      ]
     }
   },
 
   components:{
     navbar
+  },
+  
+  methods:{
+    remove(payload){
+      //console.log(payload)
+      this.friends = this.friends.filter(friend =>{
+        return friend.name !== payload.name
+      })
+    }
   }
 }
 </script>

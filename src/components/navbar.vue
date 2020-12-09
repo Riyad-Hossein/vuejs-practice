@@ -7,12 +7,24 @@
             <li>4</li>
             <li>5</li>
         </ul>
+        <hr>
+
+        <h4>Online Friends</h4>
+        <ol>
+            <li v-for="(friend,index) in friends" :key="index" ><span v-if="friend.status" @click="unfrnd(friend.name)">{{friend.name}}</span></li>
+        </ol>
     </div>
 </template>
 
 <script>
     export default {
-        name : "navbar"
+        name : "navbar",
+        props: ['friends'],
+        methods:{
+            unfrnd(name){
+                this.$emit('dlt',{name})
+            }
+        }
     }   
 </script>
 
